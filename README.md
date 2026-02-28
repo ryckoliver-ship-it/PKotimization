@@ -1,81 +1,21 @@
-@echo off
-:: Verifica se o script está rodando como Administrador
-net session >nul 2>&1
-if %errorLevel% == 0 (
-    echo [OK] Rodando como Administrador.
-) else (
-    echo [ERRO] Por favor, execute este arquivo clicando com o botao direito e selecionando "Executar como Administrador".
-    pause
-    exit
-)
+# 🚀 PKotimization v1.0
 
-title Script de Otimizacao Patrick - Engenharia
-color 0b
+O **PKotimization** é um script de automação (`.bat`) desenvolvido para otimizar o Windows 11, focando em remover processos desnecessários e garantir a máxima performance para profissionais de Engenharia e Gamers.
 
-echo ======================================================
-echo    INICIANDO LIMPEZA DE ARQUIVOS TEMPORARIOS
-echo ======================================================
-del /q /f /s %TEMP%\*
-del /q /f /s C:\Windows\Temp\*
-del /q /f /s C:\Windows\Prefetch\*
-cleanmgr /sagerun:1
-echo [OK] Limpeza concluida!
+## 🛠️ Funcionalidades Principais
+* **Limpeza Profunda:** Remove arquivos temporários (`TEMP`, `Prefetch`) e executa a Limpeza de Disco do Windows.
+* **Performance Gráfica:** Limpa o Cache de Sombreamento (Shader Cache) de GPUs NVIDIA, AMD e Intel para reduzir stuttering em jogos.
+* **Segurança Ativa:** Integra a Ferramenta de Remoção de Malware da Microsoft (MRT) e limpa o histórico de proteção do Windows Defender.
+* **Privacidade e Sistema:** Desativa a Telemetria, coleta de dados e o Microsoft Recall.
+* **Manutenção Preventiva:** Executa o Verificador de Arquivos do Sistema (`sfc /scannow`) e limpa o cache de DNS.
 
-echo.
-echo ======================================================
-echo    LIMPANDO CACHE DE SOMBREAMENTO (SHADERS)
-echo ======================================================
-:: Limpa cache de Shaders para NVIDIA, AMD e DirectX (Geral)
-echo Removendo arquivos de cache de GPU antigos...
-del /q /f /s "%LocalAppData%\D3DSCache\*" >nul 2>&1
-del /q /f /s "%LocalAppData%\NVIDIA\DXCache\*" >nul 2>&1
-del /q /f /s "%LocalAppData%\AMD\DxCache\*" >nul 2>&1
-echo [OK] Cache de sombreamento limpo!
+## 📦 Como Utilizar
+1. Baixe o arquivo `PKotimization.bat`.
+2. Clique com o botão direito e selecione **"Executar como Administrador"**.
+3. Siga as instruções na tela e reinicie o computador após a conclusão para aplicar todas as mudanças.
 
-echo.
-echo ======================================================
-echo    LIMPEZA DO HISTORICO DO WINDOWS DEFENDER
-echo ======================================================
-:: Remove o historico de verificacoes e acoes do Defender
-del /q /s "C:\ProgramData\Microsoft\Windows Defender\Scans\History\Service\*" >nul 2>&1
-echo [OK] Historico de protecao limpo!
+## ⚖️ Licença
+Este projeto está sob a licença **MIT**, o que significa que é gratuito e de código aberto para a comunidade.
 
-echo.
-echo ======================================================
-echo    OTIMIZACAO DE REDE E SISTEMA
-echo ======================================================
-ipconfig /flushdns
-sfc /scannow
-echo [OK] Rede e Sistema verificados!
-
-echo.
-echo ======================================================
-echo    SEGURANCA: FERRAMENTA DE REMOCAO DE MALWARE (MRT)
-echo ======================================================
-echo Iniciando verificacao rapida em segundo plano...
-start /wait mrt.exe /n /q
-echo [OK] Verificacao de Malware concluida!
-
-echo.
-echo ======================================================
-echo    DESATIVANDO TELEMETRIA E COLETA DE DADOS
-echo ======================================================
-sc stop DiagTrack
-sc config DiagTrack start= disabled
-sc stop dmwappushservice
-sc config dmwappushservice start= disabled
-echo [OK] Telemetria desativada!
-
-echo.
-echo ======================================================
-echo    GARANTINDO QUE O RECALL ESTEJA DESATIVADO
-echo ======================================================
-DISM /Online /Disable-Feature /FeatureName:"Recall"
-echo [OK] Comando Recall processado!
-
-echo.
-echo ======================================================
-echo    PROCESSO FINALIZADO COM SUCESSO!
-echo ======================================================
-echo Recomendado reiniciar o computador para aplicar tudo.
-pause
+---
+*Desenvolvido por **Patrick Albuquerque** para ajudar a melhorar a experiência com o Windows 11.*
